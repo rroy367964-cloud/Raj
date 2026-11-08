@@ -1,0 +1,630 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#080C16"
+    android:fitsSystemWindows="true">
+
+    <!-- Top Navigation Header -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/header_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Left: Menu hamburger icon + status dot -->
+        <LinearLayout
+            android:id="@+id/layout_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <View
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:layout_marginEnd="6dp"
+                android:background="@drawable/bg_avatar_circle"
+                android:backgroundTint="#00E5FF" />
+
+            <ImageView
+                android:id="@+id/btn_menu"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:contentDescription="Menu"
+                android:src="@drawable/ic_menu" />
+        </LinearLayout>
+
+        <!-- Center: Title "Maya" & Code tag -->
+        <LinearLayout
+            android:id="@+id/layout_title_center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Code: maya-greeting"
+                android:textColor="#38BDF8"
+                android:textSize="9sp" />
+
+            <TextView
+                android:id="@+id/tv_app_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Maya"
+                android:textColor="#FFFFFF"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Right: Minimize pill & Bell icon -->
+        <LinearLayout
+            android:id="@+id/layout_minimize_bell"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/btn_minimize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/bg_minimize_pill"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="4dp"
+                android:text="- Minimize"
+                android:textColor="#00E5FF"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/btn_bell"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:contentDescription="Notifications"
+                android:src="@drawable/ic_bell" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Scrollable Body -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_body"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header_layout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="18dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="24dp">
+
+            <!-- Top User Avatar (centered below Maya title) -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="4dp">
+
+                <ImageView
+                    android:id="@+id/iv_header_avatar"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/bg_avatar_glow"
+                    android:contentDescription="User Avatar"
+                    android:padding="2dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/maya_avatar" />
+            </FrameLayout>
+
+            <!-- Greeting Text & Energy Badge Row -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp">
+
+                <!-- Left Greeting -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/tv_energy_badge"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/tv_greeting_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Good afternoon,"
+                        android:textColor="#FFFFFF"
+                        android:textSize="17sp" />
+
+                    <TextView
+                        android:id="@+id/tv_greeting_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="dost"
+                        android:textColor="#FFFFFF"
+                        android:textSize="28sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txtStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="Sun rahi hai..."
+                        android:textColor="#00E5FF"
+                        android:textSize="13sp"
+                        android:textStyle="italic" />
+                </LinearLayout>
+
+                <!-- Right Energy Badge -->
+                <TextView
+                    android:id="@+id/tv_energy_badge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_energy_badge"
+                    android:paddingHorizontal="14dp"
+                    android:paddingVertical="7dp"
+                    android:text="⚡ 21 Energy"
+                    android:textColor="#F59E0B"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Center Character Slot (Maya in Blue Hoodie) -->
+            <FrameLayout
+                android:id="@+id/character_container"
+                android:layout_width="match_parent"
+                android:layout_height="270dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_character_card"
+                android:padding="8dp">
+
+                <ImageView
+                    android:id="@+id/iv_character"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="Maya Companion"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/maya_companion" />
+
+                <!-- Voice Pill Overlay -->
+                <TextView
+                    android:id="@+id/tv_voice_status_pill"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/bg_energy_badge"
+                    android:paddingHorizontal="14dp"
+                    android:paddingVertical="4dp"
+                    android:text="Speak-to-Speak Active"
+                    android:textColor="#FFFFFF"
+                    android:textSize="11sp" />
+            </FrameLayout>
+
+            <!-- Action Buttons Row: "🎵 Gaane", "📖 Padhai", "🖊️ Journal" -->
+            <LinearLayout
+                android:id="@+id/layout_action_buttons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <!-- 🎵 Gaane -->
+                <TextView
+                    android:id="@+id/btn_action_gaane"
+                    android:layout_width="0dp"
+                    android:layout_height="44dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_action_pill"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:text="🎵 Gaane"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <!-- 📖 Padhai -->
+                <TextView
+                    android:id="@+id/btn_action_padhai"
+                    android:layout_width="0dp"
+                    android:layout_height="44dp"
+                    android:layout_marginHorizontal="3dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_action_pill"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:text="📖 Padhai"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <!-- 🖊️ Journal -->
+                <TextView
+                    android:id="@+id/btn_action_journal"
+                    android:layout_width="0dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_action_pill"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:text="🖊️ Journal"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- 3 Widget Cards Row: Mausam, Aaj, Mood -->
+            <LinearLayout
+                android:id="@+id/layout_widgets"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <!-- Card 1: Mausam -->
+                <LinearLayout
+                    android:id="@+id/card_mausam"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_widget_card"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="☀️ Mausam"
+                        android:textColor="#94A3B8"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:id="@+id/tv_widget_temp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="28°"
+                        android:textColor="#FFFFFF"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_widget_weather_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Clear"
+                        android:textColor="#E2E8F0"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_widget_humidity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="💧 54%"
+                        android:textColor="#38BDF8"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
+                <!-- Card 2: Aaj -->
+                <LinearLayout
+                    android:id="@+id/card_aaj"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="3dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_widget_card"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="📅 Aaj"
+                        android:textColor="#94A3B8"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:id="@+id/tv_widget_date_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="7"
+                        android:textColor="#FFFFFF"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_widget_date_str"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Sat, Nov"
+                        android:textColor="#E2E8F0"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <!-- Card 3: Mood -->
+                <LinearLayout
+                    android:id="@+id/card_mood"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_widget_card"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="❤️ Mood"
+                        android:textColor="#94A3B8"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:id="@+id/tv_widget_mood_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Pyaar …"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_widget_mood_sub"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Sab badhiya"
+                        android:textColor="#F43F5E"
+                        android:textSize="11sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Spoken Dialogue Card (Pure Speak-to-Speak Mode) -->
+            <LinearLayout
+                android:id="@+id/layout_voice_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_widget_card"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="MAYA SPEECH &amp; CONVERSATION"
+                    android:textColor="#00E5FF"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_spoken_dialogue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:lineSpacingExtra="3dp"
+                    android:text="Namaste dost! Main Maya hoon. Niche mic button dabakar mujhse aamne-saamne seedhe aawaz mein baat kijiye!"
+                    android:textColor="#E2E8F0"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <!-- Theme / Mode Planning Note (From Screenshot) -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="'maya-greeting' — Poori app ko pure DARK THEME me banao — bilkul dark (deep black/navy backgro)"
+                android:textColor="#64748B"
+                android:textSize="10sp"
+                android:textStyle="italic" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Bottom Navigation Bar: Fixed with 5 options (Home, Scan, Rok do/Mic, Yaadein, Chat) -->
+    <LinearLayout
+        android:id="@+id/bottom_navigation_bar"
+        android:layout_width="0dp"
+        android:layout_height="68dp"
+        android:background="@drawable/bg_bottom_nav"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:weightSum="5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <!-- 1. Home -->
+        <LinearLayout
+            android:id="@+id/nav_item_home"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:contentDescription="Home"
+                android:src="@drawable/ic_nav_home" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Home"
+                android:textColor="#00E5FF"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- 2. Scan -->
+        <LinearLayout
+            android:id="@+id/nav_item_scan"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:contentDescription="Scan"
+                android:src="@drawable/ic_nav_scan" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Scan"
+                android:textColor="#94A3B8"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <!-- 3. Center Mic / "Rok do" Button -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/btnMic"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/bg_mic_circle"
+                    android:clickable="true"
+                    android:contentDescription="Voice Input Mic"
+                    android:elevation="6dp"
+                    android:focusable="true"
+                    android:padding="12dp"
+                    android:src="@drawable/ic_nav_mic" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tv_mic_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:text="Rok do"
+                android:textColor="#E2E8F0"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <!-- 4. Yaadein -->
+        <LinearLayout
+            android:id="@+id/nav_item_yaadein"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:contentDescription="Yaadein"
+                android:src="@drawable/ic_nav_yaadein" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Yaadein"
+                android:textColor="#94A3B8"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <!-- 5. Chat -->
+        <LinearLayout
+            android:id="@+id/nav_item_chat"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:contentDescription="Chat"
+                android:src="@drawable/ic_nav_chat" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Chat"
+                android:textColor="#94A3B8"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

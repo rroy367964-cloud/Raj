@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Maya</string>
+    <string name="channel_name">Maya Voice Assistant</string>
+    <string name="channel_description">Notifies when Maya voice listening is active</string>
+    <string name="header_energy">⚡ 21 Energy</string>
+    <string name="greeting_title">Good afternoon,</string>
+    <string name="greeting_name">dost</string>
+    <string name="greeting_subtitle">Sun rahi hai...</string>
+    <string name="action_gaane">🎵 Gaane</string>
+    <string name="action_padhai">📖 Padhai</string>
+    <string name="action_journal">🖊️ Journal</string>
+    <string name="chat_placeholder">Maya se kuch bhi poochho...</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_scan">Scan</string>
+    <string name="nav_mic">Rok do</string>
+    <string name="nav_yaadein">Yaadein</string>
+    <string name="nav_chat">Chat</string>
+    <string name="permission_mic_rationale">Maya needs microphone access to converse with you in voice.</string>
+</resources>

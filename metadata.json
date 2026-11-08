@@ -1,0 +1,6 @@
+{
+  "name": "Maya",
+  "description": "Virtual companion Maya with dark futuristic glassmorphic UI, real-time voice-to-voice speaking, and bilingual Hindi/English conversation.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
